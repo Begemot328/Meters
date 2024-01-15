@@ -26,13 +26,13 @@ public class MeterReadingController {
         this.service = service;
     }
 
-    @PostMapping
-    public ResponseEntity<Void> create(@RequestBody MeterReading meterReading) {
+    @PostMapping(value = "/submit")
+    public ResponseEntity<Void> submit(@RequestBody MeterReading meterReading) {
         service.submit(meterReading);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping
+    @GetMapping(value = "/find")
     public ResponseEntity<List<MeterReading>> find(@RequestParam(value = "type", required = false) MeterType type, @RequestParam(value = "userId", required = false) Long userId) {
         return new ResponseEntity<>(service.getReadings(type, userId), HttpStatus.OK);
     }
